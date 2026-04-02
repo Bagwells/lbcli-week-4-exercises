@@ -1,4 +1,4 @@
-# Create a raw transaction and add this message in it: "btrust builder 2025"
+# Create a raw transaction and add this message in it: "btrust builder 2026"
 
 # Amount of 20,000,000 satoshis to this address: 2MvLcssW49n9atmksjwg2ZCMsEMsoj3pzUP 
 # Use the UTXOs from the transaction below
