@@ -17,4 +17,4 @@ UTXO_txid=$(echo "$decodedtx" | jq -r '.txid')
 UTXO_vout1=$(echo "$decodedtx" | jq -r '.vout[0].n')
 UTXO_vout2=$(echo "$decodedtx" | jq -r '.vout[1].n')
 
-bitcoin-cli -regtest createrawtransaction '''[{"txid":"'"$UTXO_txid"'","vout":'"$UTXO_vout1"'},{"txid":"'"$UTXO_txid"'","vout":'"$UTXO_vout2"' }]''' '{"'$recipient'":'$btc'}' 0 locktime=$locktime
+bitcoin-cli -regtest createrawtransaction '''[{"txid":"'"$UTXO_txid"'","vout":'"$UTXO_vout1"'},{"txid":"'"$UTXO_txid"'","vout":'"$UTXO_vout2"' }]''' '''{"'$recipient'":'$btc'}''' 0 locktime=$locktime
