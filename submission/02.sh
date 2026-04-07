@@ -10,11 +10,13 @@ sats=20000000
 btc=$(printf "%.8f" "$(echo "$sats/100000000" | bc -l)")
 decodedtx=$(bitcoin-cli -regtest decoderawtransaction "$tx")
 
-locktime= $((25 + 2 * 7 * 24 * 60 / 10))
+locktime=$((25 + 2 * 7 * 24 * 60 / 10))
 
-UTXO_txid=$(echo "$decodedtx" | jq -r '.txid')
+UTXO_txid=$(echo "$decodedtx" | jq -r '.vin[0].txid')
 
 UTXO_vout1=$(echo "$decodedtx" | jq -r '.vout[0].n')
 UTXO_vout2=$(echo "$decodedtx" | jq -r '.vout[1].n')
 
-bitcoin-cli -regtest createrawtransaction '''[{"txid":"'"$UTXO_txid"'","vout":'"$UTXO_vout1"',"sequence":4294967293},{"txid":"'"$UTXO_txid"'","vout":'"$UTXO_vout2"',"sequence":4294967293}]''' '''{"'"$recipient"'":'"$btc"'}''' "$locktime"
+rawtx=$(bitcoin-cli -regtest createrawtransaction '''[{"txid":"'"$UTXO_txid"'","vout":'"$UTXO_vout1"',"sequence":4294967293},{"txid":"'"$UTXO_txid"'","vout":'"$UTXO_vout2"',"sequence":4294967293}]''' '''{"'"$recipient"'":'"$btc"'}''' "$locktime")
+
+echo "$rawtx"
