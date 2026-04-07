@@ -17,8 +17,7 @@ UTXO_vout1=$(echo "$decodedtx" | jq -r '.vout[0].n')
 UTXO_vout2=$(echo "$decodedtx" | jq -r '.vout[1].n')
 
 message="btrust builder 2026"
-
 data_hex=$(printf '%s' "$message" | xxd -p | tr -d '\n')
 
-rawtx=$(bitcoin-cli -regtest createrawtransaction '''[{"txid":"'"$UTXO_txid"'","vout":"'"$UTXO_vout1"'"},{"txid":"'"$UTXO_txid"'","vout":'"$UTXO_vout2"' }]''' '''{"data": "'"$data_hex"'", "'"$recipient"'": '"$btc"'}''')
+rawtx=$(bitcoin-cli -regtest createrawtransaction '''[{"txid":"'"$UTXO_txid"'","vout":'"$UTXO_vout1"'},{"txid":"'"$UTXO_txid"'","vout":'"$UTXO_vout2"' }]''' '''{"data": "'"$data_hex"'", "'"$recipient"'": '"$btc"'}''')
 echo "$rawtx"
