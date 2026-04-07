@@ -12,7 +12,7 @@ decodedtx=$(bitcoin-cli -regtest decoderawtransaction "$tx")
 
 locktime=$((25 + 2 * 7 * 24 * 60 / 10))
 
-UTXO_txid=$(echo "$decodedtx" | jq -r '.vin[0].txid')
+UTXO_txid=$(echo "$decodedtx" | jq -r '.txid')
 
 UTXO_vout1=$(echo "$decodedtx" | jq -r '.vout[0].n')
 UTXO_vout2=$(echo "$decodedtx" | jq -r '.vout[1].n')
