@@ -1,1 +1,5 @@
 # Create a wallet with the name "btrustwallet".
+
+wallet=$(bitcoin-cli -regtest createwallet "btrustwallet")
+
+echo "$wallet"
